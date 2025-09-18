@@ -1,0 +1,18 @@
+#PLAYBOOK
+#  PLAYS (main.yml) -> conjunto de tasks
+#    TASKS (TAREFAS) -> conjunto de módulos
+#      MODULE (AÇÕES) apt shell ping
+
+- name : Configuração inicial #nomenamigável
+  hosts: all #todos as VMs do inventário 
+  become: true #responsável pela elevação do usuário (sudo)
+  tasks:
+    - name: Atualizar pacotes #nome amigável
+      apt: #módulo responsável pelo gerenciador de pacotes
+        update_cache: yes #sudo apt update
+        upgrade: dist #sudo ap upgrade
+
+    - name: Instalar pacotes básicos
+      apt:
+        name: tree #sudo apt install tree
+        state: present
